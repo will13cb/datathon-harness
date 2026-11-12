@@ -97,3 +97,27 @@ def test_run_ids_unique(cfg, tmp_path):
     res = tmp_path / "r.csv"
     ids = {log_run(1.0, "e", "m", cfg=cfg, results=res) for _ in range(5)}
     assert len(ids) == 5
+
+
+def test_logging_does_not_mark_later_runs_dirty(cfg, tmp_path, monkeypatch):
+    import subprocess
+
+    import pandas as pd
+
+    def git(*a):
+        subprocess.run(["git", *a], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    res = tmp_path / "results.csv"
+    res.write_text("")
+    (tmp_path / "model.py").write_text("x = 1\n")
+    git("add", ".")
+    git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "init")
+    monkeypatch.chdir(tmp_path)
+    log_run(1.0, "e", "m", cfg=cfg, results=res)
+    log_run(2.0, "e", "m", cfg=cfg, results=res)
+    commits = pd.read_csv(res)["commit"].astype(str)
+    assert not commits.str.endswith("-dirty").any()
+    (tmp_path / "model.py").write_text("x = 2\n")  # real code change -> dirty
+    log_run(3.0, "e", "m", cfg=cfg, results=res)
+    assert pd.read_csv(res)["commit"].astype(str).iloc[-1].endswith("-dirty")

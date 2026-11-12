@@ -60,7 +60,8 @@ def log_run(
     """Append one row to results.csv. Commit your code first so `commit` points at it."""
     cfg = cfg or load_config()
     commit = _git("rev-parse", "--short", "HEAD") or "uncommitted"
-    if _git("status", "--porcelain", "--untracked-files=no"):
+    # results.csv itself changes with every logged run, so it must not count as "dirty code".
+    if _git("status", "--porcelain", "--untracked-files=no", "--", ".", ":(top,exclude)results.csv"):
         commit += "-dirty"
     now = datetime.now(timezone.utc)
     author = (
