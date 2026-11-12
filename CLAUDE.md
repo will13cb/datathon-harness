@@ -31,7 +31,7 @@
 4. **Data never goes in git** (`data/` is gitignored). Notebooks are for exploring. Anything others depend on goes in `src/dh/` as a `.py` file.
 5. **LLM calls only through `dh.llm.ask`** (mock offline, Bedrock for real, cached).
 6. **Small commits, merge often.** Pull main every ~2h. On conflict in a shared file, ask its lane.
-7. **Never commit AWS keys.** The guard hook blocks it, and blocks cloud deletes and force-push.
+7. **Never commit or read secrets.** Don't `cat`/`grep`/`source` `.env` or AWS credentials, or dump `env`. Use `make <target>`, which loads `.env` for that command. The guard hook blocks the common cases, plus cloud deletes and force-push.
 8. **The app is a deliverable (Sun 23:59).** Get `make app` showing real output by Saturday night, then keep it working.
 9. **Before Monday 13:59:** `make backup`. The AWS account disappears.
 10. **Ask, don't guess.** If an official source (event site, rules, sponsor brief, data docs) can't be reached, or key facts are missing, stop and ask the user before building on search results or assumptions. Ask for the document, or for network access to the host.

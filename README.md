@@ -54,5 +54,7 @@ If the challenge isn't a prediction task (e.g. a GenAI / document analysis one),
 
 ## Safety
 
-`.claude/hooks/guard_bash.py` blocks agents from cloud deletes, force-pushes, force-adding ignored files and committing keys.
+`.claude/hooks/guard_bash.py` (same as hackathon-template's) blocks agents from cloud deletes, force-pushes, force-adding ignored files, committing keys, and reading secrets into the conversation (`cat .env`, `grep KEY .env`, `source .env`, `printenv`, scripts that open `.env`). The `Read(./.env)` deny rules in `.claude/settings.json` only cover Claude's Read tool, which is why the guard checks Bash too.
+
+This is a speed bump against accidents, **not a security boundary**. The real protection is the event AWS account itself: it's temporary and wiped Monday 13:59. Don't put personal or long-lived keys in `.env`.
 `data/`, `.env` and `*.csv` (except `results.csv`/`splits/`) are gitignored. Run `make scan` before making the repo public.
