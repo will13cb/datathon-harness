@@ -1,0 +1,20 @@
+# The single source of truth for "how we score". Fill this in at kickoff,
+# the moment the challenge is revealed, and commit it. Changing anything here
+# after people have started logging runs invalidates results.csv; say so in CONTEXT.md.
+
+[data]
+file = ""            # e.g. "train.csv" (relative to data/raw/). Empty until kickoff.
+target = ""          # column to predict; leave empty for a non-predictive (GenAI / analysis) challenge
+id_col = ""          # optional unique row id
+time_col = ""        # set this for anything financial with dates -> time-based split
+group_col = ""       # optional: e.g. ticker / client id, so one entity never spans train and val
+drop_cols = []       # columns that must never be features (leaks, free text, post-event info)
+
+[split]
+kind = "auto"        # auto | time | group | random   (auto = time if time_col else group if group_col else random)
+val_frac = 0.2
+seed = 2026
+
+[eval]
+metric = ""          # rmse | mae | mape | r2 | auc | logloss | accuracy | f1 | sharpe
+greater_is_better = true   # ignored for metrics the harness already knows

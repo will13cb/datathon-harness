@@ -1,0 +1,27 @@
+[project]
+name = "datathon-harness"
+version = "0.1.0"
+description = "Team harness for the PolyFinances Datathon 2026 (Polytechnique Montréal)"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.0",
+  "numpy>=1.24",
+  "scikit-learn>=1.3",
+  "pyarrow>=14",
+  "boto3>=1.34",
+  "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "nbstripout>=0.7", "ipykernel"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

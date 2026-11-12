@@ -1,0 +1,29 @@
+# data never goes in git
+data/*
+!data/README.md
+*.parquet
+*.csv
+!results.csv
+!splits/*.csv
+*.xlsx
+*.zip
+*.pkl
+*.joblib
+models/
+.cache/
+
+# secrets: AWS keys from the event account especially
+.env
+.env.*
+!.env.example
+.aws/
+*credentials*
+
+# python / notebooks
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+.worktrees/
