@@ -5,8 +5,13 @@
 ## The challenge (fill at kickoff)
 - **Problem statement:** TODO (paste it)
 - **Data:** TODO (files, where they live: S3 / download link)
-- **What we submit:** video + one-pager + technical documentation (confirm at kickoff). Deadline: TODO (2025 pattern: Monday 14:00, AWS accounts wiped 13:59)
-- **Judging criteria:** TODO (paste them. 2025 = financial relevance & explainability + use of AWS: architecture quality, scalability)
+- **Deadlines (verified, see CONTEXT.md):**
+  - **Sun Nov 15 23:59: GitHub repo + application**
+  - Mon Nov 16 13:59: AWS accounts wiped
+  - Mon 14:00: video + one-pager + technical doc
+  - Finalist pitches: Fri Nov 20, 14:00
+- **Judging criteria:** TODO (paste them at the 10:30 presentation. 2025 = financial relevance & explainability + use of AWS: architecture quality, scalability)
+- **Challenge owner / sponsors:** TODO (Banque Nationale + AWS appear to headline. Also La Caisse, Desjardins, CGI, Valnet, BeeQuest, Mag Energy, Finance Montréal, CFA Montréal)
 - **Our angle, one sentence:** TODO
 - **Sponsor services we showcase:** TODO (e.g. S3 + Bedrock + SageMaker. Name them in every deliverable)
 
@@ -15,7 +20,7 @@
 |---|---|---|
 | eda | TODO | `experiments/eda/`, "Verified" facts in CONTEXT.md |
 | features / models | TODO | `src/dh/features.py`, `experiments/models/` |
-| aws | TODO | `src/dh/llm.py`, `aws/`, the architecture diagram |
+| aws / app | TODO | `src/dh/llm.py`, `app/`, `aws/`, the architecture diagram |
 | pitch | TODO | `deliverables/` |
 | shared (ask first) | anyone, announce in chat | `harness.toml`, `splits/`, `src/dh/{data,metrics,evaluate}.py`, this file |
 
@@ -27,8 +32,9 @@
 5. **LLM calls only through `dh.llm.ask`** (mock offline, Bedrock for real, cached).
 6. **Small commits, merge often.** Pull main every ~2h. On conflict in a shared file, ask its lane.
 7. **Never commit AWS keys.** The guard hook blocks it, and blocks cloud deletes and force-push.
-8. **Before the deadline:** `make backup`. The AWS account disappears.
-9. **Ask, don't guess.** If an official source (event site, rules, sponsor brief, data docs) can't be reached, or key facts are missing, stop and ask the user before building on search results or assumptions. Ask for the document, or for network access to the host.
+8. **The app is a deliverable (Sun 23:59).** Get `make app` showing real output by Saturday night, then keep it working.
+9. **Before Monday 13:59:** `make backup`. The AWS account disappears.
+10. **Ask, don't guess.** If an official source (event site, rules, sponsor brief, data docs) can't be reached, or key facts are missing, stop and ask the user before building on search results or assumptions. Ask for the document, or for network access to the host.
 
 ## Commands
 | | |
@@ -39,6 +45,7 @@
 | `make split` | freeze train/val split (once!) |
 | `make baseline` | constant + GBM baselines, logged |
 | `make board` | leaderboard from results.csv |
+| `make app` | run the demo app (Streamlit) |
 | `make test` | tests |
 | `make worktrees` | one worktree per lane, for parallel agents |
 | `make backup` | commit+push results/deliverables before AWS teardown |

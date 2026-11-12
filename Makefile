@@ -2,7 +2,7 @@ SHELL := /bin/bash
 ENV   := set -a; [ -f .env ] && . ./.env; set +a;
 PY    := .venv/bin/python
 .DEFAULT_GOAL := help
-.PHONY: help setup data check split baseline board test worktrees backup scan claude
+.PHONY: help setup data check split baseline board app test worktrees backup scan claude
 
 help: ## List targets
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -27,6 +27,9 @@ baseline: ## Score constant + GBM baselines and log them
 
 board: ## Leaderboard from results.csv
 	@$(PY) -m dh board
+
+app: ## Run the demo app on :8501
+	@$(ENV) $(PY) -m streamlit run app/app.py
 
 test: ## Run tests (offline)
 	@LLM_PROVIDER=mock $(PY) -m pytest -q

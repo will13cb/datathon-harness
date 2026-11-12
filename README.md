@@ -1,7 +1,7 @@
 # datathon-harness: PolyFinances Datathon 2026
 
 A small coordination harness for a team of 4 (humans + coding agents) at the
-[PolyFinances Datathon](https://polyfinances.ca/datathon) at Polytechnique Montréal (Nov 14–15, 2026; partners AWS and La Caisse).
+[PolyFinances Datathon](https://polyfinances.ca/datathon) at Polytechnique Montréal (Nov 14–15, 2026; headline partners Banque Nationale + AWS).
 It's built from [hackathon-template](https://github.com/will13cb/hackathon-template) (guard hook, Makefile, worktrees, Bedrock helper).
 It's adapted for data work: **one frozen split, one scoring function, and one shared results log**, so everyone's numbers are comparable and every number in the pitch is real.
 
@@ -16,6 +16,7 @@ src/dh/                 data.py (load + split), metrics.py, evaluate.py (score/l
 experiments/            per-lane scratch (notebooks OK)
 deliverables/           one-pager, video script, technical doc templates
 aws/architecture.md     architecture diagram (judged!)
+app/app.py              demo application (Streamlit). It is a deliverable!
 scripts/                get-data, worktrees, backup, scan-secrets
 ```
 
@@ -37,15 +38,19 @@ If the challenge isn't a prediction task (e.g. a GenAI / document analysis one),
 - Merge to main every ~2h (`/sync` in Claude Code if you're running worktrees).
 - Shared decisions (metric, split, final model) → one line in the CLAUDE.md decisions log.
 
-## Timeline (verify at the opening)
+## Timeline (official schedule in CONTEXT.md)
 
 | When | What |
 |---|---|
-| Sat AM | Kickoff steps above. Baseline logged by lunch. |
-| Sat PM–night | EDA → features → models. AWS lane builds the pipeline + diagram early (it's judged). |
-| Sun AM | Pick the final approach (decisions log). Feature freeze at Sun 18:00. |
-| Sun PM | Explainability, one-pager, video draft. |
-| Mon AM | Polish, `make backup`, submit **well before** 14:00. The AWS account is wiped at 13:59. |
+| Sat 10:30 | Challenge presentation: fill CLAUDE.md TODOs live. |
+| Sat 12:00–14:00 | Hacking starts. Kickoff steps above. Baseline logged + app skeleton running. |
+| Sat PM–night | EDA → features → models. AWS/app lane: pipeline + diagram + `make app` showing real output by midnight. |
+| Sun AM | Pick the final approach (decisions log). Feature freeze ~13:00. |
+| Sun 13:00–16:00 | Explainability, app polish, record video footage while still on site. |
+| **Sun 23:59** | **GitHub repo + application due.** Do the final push by 22:00. |
+| Mon AM | One-pager, tech doc, video edit. `make backup` before **13:59** (AWS wiped). |
+| **Mon 14:00** | **Video + one-pager + technical doc due.** |
+| Fri Nov 20, 14:00 | Finalist pitches (M-5519, Lassonde). |
 
 ## Safety
 
