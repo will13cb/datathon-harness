@@ -28,6 +28,7 @@
 6. **Small commits, merge often.** Pull main every ~2h. On conflict in a shared file, ask its lane.
 7. **Never commit AWS keys.** The guard hook blocks it, and blocks cloud deletes and force-push.
 8. **Before the deadline:** `make backup`. The AWS account disappears.
+9. **Ask, don't guess.** If an official source (event site, rules, sponsor brief, data docs) can't be reached, or key facts are missing, stop and ask the user before building on search results or assumptions. Ask for the document, or for network access to the host.
 
 ## Commands
 | | |
